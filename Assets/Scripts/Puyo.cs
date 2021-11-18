@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Puyo : MonoBehaviour {
     private GameObject puyoObj;
@@ -53,5 +54,15 @@ public class Puyo : MonoBehaviour {
     public string getLinkStatus()
     {
         return linkStatus;
+    }
+    public void Hide()
+    {
+        Image image = this.getPuyoObj().GetComponent<Image>();
+        image.enabled = false;
+    }
+    public void Show()
+    {
+        Image image = this.getPuyoObj().GetComponent<Image>();
+        image.enabled = true;
     }
 }

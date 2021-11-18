@@ -6,7 +6,7 @@ public class Setting : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Screen.SetResolution(384, 800, false);
+        Screen.SetResolution(1920, 1080, false);
     }
 	
 	// Update is called once per frame

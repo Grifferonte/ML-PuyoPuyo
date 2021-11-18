@@ -25,7 +25,7 @@ public class KeyboardController : MonoBehaviour
                 PuyoController.puyoDown(true);
             }
             //counterclockwise
-            if (Input.GetKeyUp(KeyCode.Z))
+            if (Input.GetKeyUp(KeyCode.W))
             {
                 PuyoController.puyoCounterclockwise();
             }

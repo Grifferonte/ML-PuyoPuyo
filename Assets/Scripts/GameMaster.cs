@@ -47,10 +47,10 @@ public class GameMaster : MonoBehaviour
     {
         if (gameStatus == GameStatus.GameInitializing)
         {
-            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 175));
-            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 143));
-            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 50));
-            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 18));
+            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(150, 175));
+            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(150, 143));
+            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(150, 50));
+            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(150, 18));
 
             gameStatus = GameStatus.PuyoCreating;
         }

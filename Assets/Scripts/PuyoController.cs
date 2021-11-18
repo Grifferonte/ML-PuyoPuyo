@@ -8,12 +8,16 @@ public class PuyoController : MonoBehaviour {
     {
         GameMaster.controlMainPuyo = GameMaster.puyoInventory.Dequeue();
         GameMaster.controlSubPuyo = GameMaster.puyoInventory.Dequeue();
-        GameMaster.puyoInventory.ElementAt(1).getPuyoObj().transform.localPosition = new Vector3(100, 175, 0);
-        GameMaster.puyoInventory.ElementAt(0).getPuyoObj().transform.localPosition = new Vector3(100, 143, 0);
-        GameMaster.puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 18));
-        GameMaster.puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 50));
-        GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition = new Vector3(0, 208, 0);
-        GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3(0, 240, 0);
+        GameMaster.puyoInventory.ElementAt(1).getPuyoObj().transform.localPosition = new Vector3(150, 175, 0);
+        GameMaster.puyoInventory.ElementAt(1).Show();
+        GameMaster.puyoInventory.ElementAt(0).getPuyoObj().transform.localPosition = new Vector3(150, 143, 0);
+        GameMaster.puyoInventory.ElementAt(0).Show();
+        GameMaster.puyoInventory.Enqueue(PuyoCreater.PuyoCreate(150, 18));
+        GameMaster.puyoInventory.ElementAt(2).Hide();
+        GameMaster.puyoInventory.Enqueue(PuyoCreater.PuyoCreate(150, 50));
+        GameMaster.puyoInventory.ElementAt(3).Hide();
+        GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition = new Vector3(0, 212, 0);
+        GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3(0, 244, 0);
         GameMaster.controlMainPuyo.setPosition(new Vector2(3, 12));
         GameMaster.controlSubPuyo.setPosition(new Vector2(3, 13));
         GameMaster.subPuyoDirection = 0;
