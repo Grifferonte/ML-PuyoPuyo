@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMaster : MonoBehaviour
+public class GameMaster2 : MonoBehaviour
 {
     // Create -> Fall -> Arrange -> Link -> Calculate combo
     public enum GameStatus
@@ -48,17 +48,17 @@ public class GameMaster : MonoBehaviour
     {
         if (gameStatus == GameStatus.GameInitializing)
         {
-            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 175));
-            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 143));
-            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 50));
-            puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 18));
+            puyoInventory.Enqueue(PuyoCreater.PuyoCreate2(100, 175));
+            puyoInventory.Enqueue(PuyoCreater.PuyoCreate2(100, 143));
+            puyoInventory.Enqueue(PuyoCreater.PuyoCreate2(100, 50));
+            puyoInventory.Enqueue(PuyoCreater.PuyoCreate2(100, 18));
 
             gameStatus = GameStatus.PuyoCreating;
         }
 
         if (gameStatus == GameStatus.PuyoCreating)
         {
-            PuyoController.puyoCreate();
+            PuyoController2.puyoCreate();
             gameStatus = GameStatus.PuyoFalling;
         }
 
@@ -73,20 +73,20 @@ public class GameMaster : MonoBehaviour
 
         if (gameStatus == GameStatus.PuyoArranging)
         {
-            PuyoController.puyoArrange();
+            PuyoController2.puyoArrange();
             gameStatus = GameStatus.PuyoLinking;
         }
 
         if (gameStatus == GameStatus.PuyoLinking)
         {
-            PuyoController.resetPuyoStatusAndLinkPuyoList();
-            PuyoController.linkSamePuyo();
+            PuyoController2.resetPuyoStatusAndLinkPuyoList();
+            PuyoController2.linkSamePuyo();
             gameStatus = GameStatus.ComboCalculating;
         }
 
         if (gameStatus == GameStatus.ComboCalculating)
         {
-            if (PuyoController.readyToEliminatePuyo())
+            if (PuyoController2.readyToEliminatePuyo())
             {
                 StartCoroutine("statusChangingGap");
                 gameStatus = GameStatus.GamePause;
@@ -102,10 +102,10 @@ public class GameMaster : MonoBehaviour
     {
         yield return new WaitForSeconds(fallingSpeed);
         //If reach the bottom, create new puyo
-        if (PuyoController.reachBottom((int)controlMainPuyo.getPosition().x, (int)controlMainPuyo.getPosition().y) ||
-            PuyoController.reachBottom((int)controlSubPuyo.getPosition().x, (int)controlSubPuyo.getPosition().y))
+        if (PuyoController2.reachBottom((int)controlMainPuyo.getPosition().x, (int)controlMainPuyo.getPosition().y) ||
+            PuyoController2.reachBottom((int)controlSubPuyo.getPosition().x, (int)controlSubPuyo.getPosition().y))
         {
-            if (PuyoController.isGameOver())
+            if (PuyoController2.isGameOver())
             {
                 gameOverObj.SetActive(true);
                 gameStatus = GameStatus.GamePause;
@@ -124,7 +124,7 @@ public class GameMaster : MonoBehaviour
         }
         else
         {
-            PuyoController.puyoDown(true);
+            PuyoController2.puyoDown(true);
         }
         falling = true;
     }
@@ -135,7 +135,7 @@ public class GameMaster : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         StartCoroutine("showComboImg");
         ImageController.setComboNumber(++comboNumber);
-        PuyoController.eliminatePuyo();
+        PuyoController2.eliminatePuyo();
         gameStatus = GameStatus.PuyoArranging;
     }
 

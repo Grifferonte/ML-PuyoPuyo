@@ -62,4 +62,44 @@ public class PuyoCreater : MonoBehaviour
 
         return puyo;
     }
+    public static Puyo PuyoCreate2(int x, int y)
+    {
+        //print("puyo is creating...");
+        Puyo puyo = GameMaster2.puyoGroupObj.AddComponent<Puyo>();
+        puyo.setColor(Random.Range(0, 5));
+        puyo.setLinkStatus(ImageController.NORMAL);
+        GameObject newPuyoObj;
+        switch (puyo.getColor())
+        {
+            case 0:
+                newPuyoObj = Instantiate(bluePuyoGameObject);
+                break;
+            case 1:
+                newPuyoObj = Instantiate(greenPuyoGameObject);
+                break;
+            case 2:
+                newPuyoObj = Instantiate(purplePuyoGameObject);
+                break;
+            case 3:
+                newPuyoObj = Instantiate(redPuyoGameObject);
+                break;
+            case 4:
+                newPuyoObj = Instantiate(yellowPuyoGameObject);
+                break;
+            default:
+                newPuyoObj = Instantiate(bluePuyoGameObject);
+                break;
+        }
+        newPuyoObj.transform.SetParent(GameMaster2.puyoGroupObj.transform);
+        newPuyoObj.transform.localPosition = new Vector3(x, y, 0);
+        newPuyoObj.transform.localScale = new Vector3(1, 1, 1);
+        puyo.setPuyoObj(newPuyoObj);
+
+        List<Puyo> puyoList = new List<Puyo>();
+        puyoList.Add(puyo);
+        puyo.setLinkPuyoList(puyoList);
+
+        return puyo;
+    }
+
 }

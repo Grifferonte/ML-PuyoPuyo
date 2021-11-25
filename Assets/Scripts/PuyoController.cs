@@ -3,35 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class PuyoController : MonoBehaviour {
+public class PuyoController : MonoBehaviour
+{
     public static void puyoCreate()
     {
         GameMaster.controlMainPuyo = GameMaster.puyoInventory.Dequeue();
         GameMaster.controlSubPuyo = GameMaster.puyoInventory.Dequeue();
-        GameMaster.puyoInventory.ElementAt(1).getPuyoObj().transform.localPosition = new Vector3(150, 175, 0);
+        GameMaster.puyoInventory.ElementAt(1).getPuyoObj().transform.localPosition = new Vector3(160, 210, 0);
         GameMaster.puyoInventory.ElementAt(1).Show();
-        GameMaster.puyoInventory.ElementAt(0).getPuyoObj().transform.localPosition = new Vector3(150, 143, 0);
+        GameMaster.puyoInventory.ElementAt(0).getPuyoObj().transform.localPosition = new Vector3(160, 258, 0);
         GameMaster.puyoInventory.ElementAt(0).Show();
-        GameMaster.puyoInventory.Enqueue(PuyoCreater.PuyoCreate(150, 18));
+        GameMaster.puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 18));
         GameMaster.puyoInventory.ElementAt(2).Hide();
-        GameMaster.puyoInventory.Enqueue(PuyoCreater.PuyoCreate(150, 50));
+        GameMaster.puyoInventory.Enqueue(PuyoCreater.PuyoCreate(100, 50));
         GameMaster.puyoInventory.ElementAt(3).Hide();
-        GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition = new Vector3(0, 212, 0);
-        GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3(0, 244, 0);
+        GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition = new Vector3(0, 312, 0);
+        GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3(0, 360, 0);
         GameMaster.controlMainPuyo.setPosition(new Vector2(3, 12));
         GameMaster.controlSubPuyo.setPosition(new Vector2(3, 13));
         GameMaster.subPuyoDirection = 0;
         GameMaster.comboNumber = 0;
-        GameMaster.mainPuyoShinyObj.transform.localPosition = new Vector3(0, 208, 0);
+        GameMaster.mainPuyoShinyObj.transform.localPosition = new Vector3(0, 312, 0);
         GameMaster.mainPuyoShinyObj.transform.SetAsLastSibling();
         ImageController.setShinyPuyo(GameMaster.controlMainPuyo.getColor());
     }
 
-    public static void puyoDown(bool moveShinyPuyo) {
+    public static void puyoDown(bool moveShinyPuyo)
+    {
         GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition = new Vector3
-                    (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y - 32, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
+                    (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y - 48, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
         GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3
-            (GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.x, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.y - 32, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.z);
+            (GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.x, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.y - 48, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.z);
         GameMaster.controlMainPuyo.setPosition(new Vector2(GameMaster.controlMainPuyo.getPosition().x, GameMaster.controlMainPuyo.getPosition().y - 1));
         GameMaster.controlSubPuyo.setPosition(new Vector2(GameMaster.controlSubPuyo.getPosition().x, GameMaster.controlSubPuyo.getPosition().y - 1));
         if (moveShinyPuyo)
@@ -40,11 +42,12 @@ public class PuyoController : MonoBehaviour {
         }
     }
 
-    public static void puyoLeft(bool moveShinyPuyo) {
+    public static void puyoLeft(bool moveShinyPuyo)
+    {
         GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition = new Vector3
-                    (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x - 32, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
+                    (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x - 48, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
         GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3
-            (GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.x - 32, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.z);
+            (GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.x - 48, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.z);
         GameMaster.controlMainPuyo.setPosition(new Vector2(GameMaster.controlMainPuyo.getPosition().x - 1, GameMaster.controlMainPuyo.getPosition().y));
         GameMaster.controlSubPuyo.setPosition(new Vector2(GameMaster.controlSubPuyo.getPosition().x - 1, GameMaster.controlSubPuyo.getPosition().y));
         if (moveShinyPuyo)
@@ -53,11 +56,12 @@ public class PuyoController : MonoBehaviour {
         }
     }
 
-    public static void puyoRight(bool moveShinyPuyo) {
+    public static void puyoRight(bool moveShinyPuyo)
+    {
         GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition = new Vector3
-                    (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x + 32, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
+                    (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x + 48, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
         GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3
-            (GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.x + 32, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.z);
+            (GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.x + 48, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition.z);
         GameMaster.controlMainPuyo.setPosition(new Vector2(GameMaster.controlMainPuyo.getPosition().x + 1, GameMaster.controlMainPuyo.getPosition().y));
         GameMaster.controlSubPuyo.setPosition(new Vector2(GameMaster.controlSubPuyo.getPosition().x + 1, GameMaster.controlSubPuyo.getPosition().y));
         if (moveShinyPuyo)
@@ -70,18 +74,19 @@ public class PuyoController : MonoBehaviour {
     {
         int x = (int)GameMaster.controlMainPuyo.getPosition().x;
         int y = (int)GameMaster.controlMainPuyo.getPosition().y;
-        if (GameMaster.subPuyoDirection==0) {
-            if ((x==0 || GameMaster.puyoArr[x - 1, y] == null) && (x == 5 || GameMaster.puyoArr[x + 1, y] == null))
+        if (GameMaster.subPuyoDirection == 0)
+        {
+            if ((x == 0 || GameMaster.puyoArr[x - 1, y] == null) && (x == 5 || GameMaster.puyoArr[x + 1, y] == null))
             {
                 if (x == 0 || GameMaster.puyoArr[x - 1, y] != null)
                 {
-                    puyoRight(true);
+                   puyoRight(true);
                 }
                 GameMaster.subPuyoDirection = 3;
                 subPuyoMoveToLeft();
             }
         }
-        else if(GameMaster.subPuyoDirection == 1)
+        else if (GameMaster.subPuyoDirection == 1)
         {
             GameMaster.subPuyoDirection = 0;
             subPuyoMoveToTop();
@@ -166,7 +171,7 @@ public class PuyoController : MonoBehaviour {
                     if (GameMaster.puyoArr[x, y - 1] == null)
                     {
                         GameObject tempPuyo = GameMaster.puyoArr[x, y].getPuyoObj();
-                        tempPuyo.transform.localPosition = new Vector3(tempPuyo.transform.localPosition.x, tempPuyo.transform.localPosition.y - 32, tempPuyo.transform.localPosition.z);
+                        tempPuyo.transform.localPosition = new Vector3(tempPuyo.transform.localPosition.x, tempPuyo.transform.localPosition.y - 48, tempPuyo.transform.localPosition.z);
                         GameMaster.puyoArr[x, y - 1] = GameMaster.puyoArr[x, y];
                         GameMaster.puyoArr[x, y] = null;
                         y = 1;
@@ -196,20 +201,22 @@ public class PuyoController : MonoBehaviour {
         if (y >= 13)
             return false;
 
-        if (x <= 0 && type==0)
+        if (x <= 0 && type == 0)
             return true;
 
         if (x >= 5 && type == 1)
             return true;
 
-        if (type==0) {
+        if (type == 0)
+        {
             if (GameMaster.puyoArr[x - 1, y] != null)
             {
                 return true;
             }
         }
-        else {
-            if(GameMaster.puyoArr[x + 1, y] != null)
+        else
+        {
+            if (GameMaster.puyoArr[x + 1, y] != null)
             {
                 return true;
             }
@@ -217,30 +224,31 @@ public class PuyoController : MonoBehaviour {
         return false;
     }
 
-    public static void subPuyoMoveToTop() {
+    public static void subPuyoMoveToTop()
+    {
         GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3
-            (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y + 32, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
+            (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y + 48, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
         GameMaster.controlSubPuyo.setPosition(new Vector2(GameMaster.controlMainPuyo.getPosition().x, GameMaster.controlMainPuyo.getPosition().y + 1));
     }
 
     public static void subPuyoMoveToDown()
     {
         GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3
-            (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y - 32, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
+            (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y - 48, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
         GameMaster.controlSubPuyo.setPosition(new Vector2(GameMaster.controlMainPuyo.getPosition().x, GameMaster.controlMainPuyo.getPosition().y - 1));
     }
 
     public static void subPuyoMoveToLeft()
     {
         GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3
-            (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x - 32, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
+            (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x - 48, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
         GameMaster.controlSubPuyo.setPosition(new Vector2(GameMaster.controlMainPuyo.getPosition().x - 1, GameMaster.controlMainPuyo.getPosition().y));
     }
 
     public static void subPuyoMoveToRight()
     {
         GameMaster.controlSubPuyo.getPuyoObj().transform.localPosition = new Vector3
-            (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x + 32, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
+            (GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.x + 48, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.y, GameMaster.controlMainPuyo.getPuyoObj().transform.localPosition.z);
         GameMaster.controlSubPuyo.setPosition(new Vector2(GameMaster.controlMainPuyo.getPosition().x + 1, GameMaster.controlMainPuyo.getPosition().y));
     }
 
