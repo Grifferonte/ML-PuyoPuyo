@@ -61,6 +61,11 @@ public class ImageController : MonoBehaviour
     {
         GameMaster.mainPuyoShinyObj.GetComponent<Image>().sprite = shinyPuyoDic[num];
     }
+    public static void setShinyPuyo2(int num)
+    {
+        GameMaster2.mainPuyoShinyObj.GetComponent<Image>().sprite = shinyPuyoDic[num];
+    }
+
 
     public static void setComboNumber(int num)
     {
