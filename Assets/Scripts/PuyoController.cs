@@ -160,7 +160,7 @@ public class PuyoController : MonoBehaviour
 
     public static void puyoArrange()
     {
-        GameMaster.mainPuyoShinyObj.transform.localPosition = new Vector3(0, 208, 0);
+        GameMaster.mainPuyoShinyObj.transform.localPosition = new Vector3(0, 312, 0);
         //If a puyo on the air, then make it fall to bottom.
         for (int y = 1; y < 13; y++)
         {
