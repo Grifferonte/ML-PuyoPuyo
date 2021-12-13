@@ -458,6 +458,26 @@ public class PuyoController2 : MonoBehaviour
                 {
                     if (ImageController.ELIMINATE_FACE == GameMaster2.puyoArr[x, y].getLinkStatus())
                     {
+                        if (GameMaster2.puyoArr[x + 1, y].getColor() == 5)
+                        {
+                            Destroy(GameMaster2.puyoArr[x + 1, y].getPuyoObj());
+                            GameMaster2.puyoArr[x + 1, y] = null;
+                        }
+                        if (GameMaster2.puyoArr[x - 1, y].getColor() == 5)
+                        {
+                            Destroy(GameMaster2.puyoArr[x - 1, y].getPuyoObj());
+                            GameMaster2.puyoArr[x - 1, y] = null;
+                        }
+                        if (GameMaster2.puyoArr[x, y + 1].getColor() == 5)
+                        {
+                            Destroy(GameMaster2.puyoArr[x, y + 1].getPuyoObj());
+                            GameMaster2.puyoArr[x, y + 1] = null;
+                        }
+                        if (GameMaster2.puyoArr[x, y - 1].getColor() == 5)
+                        {
+                            Destroy(GameMaster2.puyoArr[x + 1, y - 1].getPuyoObj());
+                            GameMaster2.puyoArr[x, y - 1] = null;
+                        }
                         Destroy(GameMaster2.puyoArr[x, y].getPuyoObj());
                         GameMaster2.puyoArr[x, y] = null;
                     }

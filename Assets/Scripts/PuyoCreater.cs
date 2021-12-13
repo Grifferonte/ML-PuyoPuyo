@@ -9,12 +9,15 @@ public class PuyoCreater : MonoBehaviour
     public GameObject purplePuyo;
     public GameObject redPuyo;
     public GameObject yellowPuyo;
+    public GameObject GrayPuyo;
 
     public static GameObject bluePuyoGameObject;
     public static GameObject greenPuyoGameObject;
     public static GameObject purplePuyoGameObject;
     public static GameObject redPuyoGameObject;
     public static GameObject yellowPuyoGameObject;
+    public static GameObject GrayPuyoGameObject;
+
 
     void Start()
     {
@@ -23,6 +26,7 @@ public class PuyoCreater : MonoBehaviour
         purplePuyoGameObject = purplePuyo;
         redPuyoGameObject = redPuyo;
         yellowPuyoGameObject = yellowPuyo;
+        GrayPuyoGameObject = GrayPuyo;
     }
 
     public static Puyo PuyoCreate(int x, int y) {
@@ -90,6 +94,44 @@ public class PuyoCreater : MonoBehaviour
                 newPuyoObj = Instantiate(bluePuyoGameObject);
                 break;
         }
+        newPuyoObj.transform.SetParent(GameMaster2.puyoGroupObj.transform);
+        newPuyoObj.transform.localPosition = new Vector3(x, y, 0);
+        newPuyoObj.transform.localScale = new Vector3(1, 1, 1);
+        puyo.setPuyoObj(newPuyoObj);
+
+        List<Puyo> puyoList = new List<Puyo>();
+        puyoList.Add(puyo);
+        puyo.setLinkPuyoList(puyoList);
+
+        return puyo;
+    }
+    public static Puyo Graypuyocreate(int x, int y)
+    {
+        //print("puyo is creating...");
+        Puyo puyo = GameMaster.puyoGroupObj.AddComponent<Puyo>();
+        puyo.setColor(5);
+        puyo.setLinkStatus(ImageController.NORMAL);
+        GameObject newPuyoObj;
+        newPuyoObj = Instantiate(GrayPuyoGameObject);
+        newPuyoObj.transform.SetParent(GameMaster.puyoGroupObj.transform);
+        newPuyoObj.transform.localPosition = new Vector3(x, y, 0);
+        newPuyoObj.transform.localScale = new Vector3(1, 1, 1);
+        puyo.setPuyoObj(newPuyoObj);
+
+        List<Puyo> puyoList = new List<Puyo>();
+        puyoList.Add(puyo);
+        puyo.setLinkPuyoList(puyoList);
+
+        return puyo;
+    }
+    public static Puyo Graypuyocreate2(int x, int y)
+    {
+        //print("puyo is creating...");
+        Puyo puyo = GameMaster2.puyoGroupObj.AddComponent<Puyo>();
+        puyo.setColor(5);
+        puyo.setLinkStatus(ImageController.NORMAL);
+        GameObject newPuyoObj;
+        newPuyoObj=Instantiate(GrayPuyoGameObject);
         newPuyoObj.transform.SetParent(GameMaster2.puyoGroupObj.transform);
         newPuyoObj.transform.localPosition = new Vector3(x, y, 0);
         newPuyoObj.transform.localScale = new Vector3(1, 1, 1);

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Puyo : MonoBehaviour {
     private GameObject puyoObj;
     private List<Puyo> linkPuyoList;
-    //0 = Blue, 1 = Green, 2 = Purple, 3 = Red, 4 = Yellow
+    //0 = Blue, 1 = Green, 2 = Purple, 3 = Red, 4 = Yellow, 5=Gray(penalty)
     private int color;
     private Vector2 position;
     private string linkStatus;
