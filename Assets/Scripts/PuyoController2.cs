@@ -458,25 +458,35 @@ public class PuyoController2 : MonoBehaviour
                 {
                     if (ImageController.ELIMINATE_FACE == GameMaster2.puyoArr[x, y].getLinkStatus())
                     {
-                        if (GameMaster2.puyoArr[x + 1, y].getColor() == 5)
-                        {
-                            Destroy(GameMaster2.puyoArr[x + 1, y].getPuyoObj());
-                            GameMaster2.puyoArr[x + 1, y] = null;
+                        GameMaster2.destroyedpuyo++;
+                        if (x < 5) if ( GameMaster2.puyoArr[x + 1, y]!=null)
+                        { 
+                            if (GameMaster2.puyoArr[x + 1, y].getColor() == 5) { 
+                                Destroy(GameMaster2.puyoArr[x + 1, y].getPuyoObj());
+                                GameMaster2.puyoArr[x + 1, y] = null;
+                            }
                         }
-                        if (GameMaster2.puyoArr[x - 1, y].getColor() == 5)
-                        {
-                            Destroy(GameMaster2.puyoArr[x - 1, y].getPuyoObj());
-                            GameMaster2.puyoArr[x - 1, y] = null;
+                        if (x > 0) if ( GameMaster2.puyoArr[x - 1, y] != null){
+                            if (GameMaster2.puyoArr[x - 1, y].getColor() == 5) {
+                        
+                                Destroy(GameMaster2.puyoArr[x - 1, y].getPuyoObj());
+                                GameMaster2.puyoArr[x - 1, y] = null;
+                            }
                         }
-                        if (GameMaster2.puyoArr[x, y + 1].getColor() == 5)
-                        {
-                            Destroy(GameMaster2.puyoArr[x, y + 1].getPuyoObj());
-                            GameMaster2.puyoArr[x, y + 1] = null;
+                        if(GameMaster2.puyoArr[x, y + 1] != null) { 
+                            if (GameMaster2.puyoArr[x, y + 1].getColor() == 5) 
+                            {
+                                Destroy(GameMaster2.puyoArr[x, y + 1].getPuyoObj());
+                                GameMaster2.puyoArr[x, y + 1] = null;
+                            }
                         }
-                        if (GameMaster2.puyoArr[x, y - 1].getColor() == 5)
+                       if(y>0) if (GameMaster2.puyoArr[x, y - 1] != null)
                         {
-                            Destroy(GameMaster2.puyoArr[x + 1, y - 1].getPuyoObj());
-                            GameMaster2.puyoArr[x, y - 1] = null;
+                            if (GameMaster2.puyoArr[x, y - 1].getColor() == 5)
+                            {
+                                Destroy(GameMaster2.puyoArr[x + 1, y - 1].getPuyoObj());
+                                GameMaster2.puyoArr[x, y - 1] = null;
+                            }
                         }
                         Destroy(GameMaster2.puyoArr[x, y].getPuyoObj());
                         GameMaster2.puyoArr[x, y] = null;
@@ -497,17 +507,5 @@ public class PuyoController2 : MonoBehaviour
         return false;
     }
 
-    public static void hold()
-    {
-        int tempMainColor = GameMaster2.puyoInventory.ElementAt(1).getColor();
-        int tempSubColor = GameMaster2.puyoInventory.ElementAt(0).getColor();
-        GameMaster2.puyoInventory.ElementAt(1).setColor(GameMaster2.controlMainPuyo.getColor());
-        GameMaster2.puyoInventory.ElementAt(0).setColor(GameMaster2.controlSubPuyo.getColor());
-        GameMaster2.controlMainPuyo.setColor(tempMainColor);
-        GameMaster2.controlSubPuyo.setColor(tempSubColor);
-        ImageController.setPuyoImage(GameMaster2.puyoInventory.ElementAt(1), ImageController.NORMAL);
-        ImageController.setPuyoImage(GameMaster2.puyoInventory.ElementAt(0), ImageController.NORMAL);
-        ImageController.setPuyoImage(GameMaster2.controlMainPuyo, ImageController.NORMAL);
-        ImageController.setPuyoImage(GameMaster2.controlSubPuyo, ImageController.NORMAL);
-    }
+    
 }

@@ -11,12 +11,12 @@ public class Penalty : MonoBehaviour
     [SerializeField] GameObject singletoken;
     [SerializeField] GameObject linetoken;
 
-    private int penaltycounter1=0;
-    private int penaltycounter2=0;
-    private GameObject penaltyzone1;
-    private GameObject penaltyzone2;
-    private GameObject single;
-    private GameObject line;
+    public static int penaltycounter1=0;
+    public static int penaltycounter2=0;
+    public static GameObject penaltyzone1;
+    public static GameObject penaltyzone2;
+    public static GameObject single;
+    public static GameObject line;
 
     private void Awake()
     {
@@ -26,33 +26,33 @@ public class Penalty : MonoBehaviour
         line = linetoken;
 
     }
-    public void penaltylineset()
+    public static void penaltylineset()
     {
         for (int x = 0; x < 6; x++)
         {
-            for (int y = 0; y < 12; y++)
+            for (int y = 12; y > 0; y--)
             {
                 if (GameMaster.puyoArr[x, y] != null)
                 {
-                    GameMaster.puyoArr[x, y + 1] = PuyoCreater.Graypuyocreate(x, y + 1);
+                    GameMaster.puyoArr[x, y + 1] = PuyoCreater.Graypuyocreate(0 + (x - 3) * 48, 312 - ((12 - y + 1) * 48));
                 }
             }
         }
     }
-    public void penaltylineset2()
+    public static void penaltylineset2()
     {
         for (int x = 0; x < 6; x++)
         {
-            for (int y = 0; y < 12; y++)
+            for (int y = 12; y > 0; y--)
             {
                 if (GameMaster2.puyoArr[x, y] != null)
                 {
-                    GameMaster2.puyoArr[x, y + 1] = PuyoCreater.Graypuyocreate2(x, y + 1);
+                    GameMaster2.puyoArr[x, y + 1] = PuyoCreater.Graypuyocreate2(0 + (x - 3) * 48, 312 - ((12 - y + 1) * 48));
                 }
             }
         }
     }
-    public void penaltysinglesset(int number)
+    public static void penaltysinglesset(int number)
     {
         bool[] colluns = new bool[6];
         for (int i = 0; i < colluns.Length; i++) colluns[i] = false;
@@ -70,17 +70,17 @@ public class Penalty : MonoBehaviour
         {
             if (colluns[x])
             {
-                for (int y = 0; y < 12; y++)
+                for (int y = 12; y > 0; y--)
                 {
                     if (GameMaster.puyoArr[x, y] != null)
                     {
-                        GameMaster.puyoArr[x, y + 1] = PuyoCreater.Graypuyocreate(x, y + 1);
+                        GameMaster.puyoArr[x, y + 1] = PuyoCreater.Graypuyocreate(0 + (x - 3) * 48, 312 - ((12 - y + 1) * 48));
                     }
                 }
             }
         }
     }
-    public void penaltysinglesset2(int number)
+    public static void penaltysinglesset2(int number)
     {
         bool[] colluns = new bool[6];
         for (int i = 0; i < colluns.Length; i++) colluns[i] = false;
@@ -98,24 +98,27 @@ public class Penalty : MonoBehaviour
         {
             if (colluns[x])
             {
-                for (int y = 0; y < 12; y++)
+                for (int y = 12; y > 0; y--)
                 {
                     if (GameMaster2.puyoArr[x, y] != null)
                     {
-                        GameMaster2.puyoArr[x, y + 1] = PuyoCreater.Graypuyocreate2(x, y + 1);
+                        GameMaster2.puyoArr[x, y + 1] = PuyoCreater.Graypuyocreate2(0 + (x - 3) * 48, 312 - ((12 - y + 1) * 48));
                     }
                 }
             }
         }
     }
-    public void penaltyzone1add(int number)
+    public static void penaltyzone1add(int number)
     {
         penaltycounter1 += number;
         int stock = penaltycounter1;
         int nbelement = 0;
-        foreach (Transform child in penaltyzone1.transform)
+        if (penaltyzone1.transform.childCount > 0)
         {
-            GameObject.Destroy(child.gameObject);
+            foreach (Transform child in penaltyzone1.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
         }
         while (stock > 0)
         {
@@ -136,16 +139,19 @@ public class Penalty : MonoBehaviour
             nbelement++;
         }
     }
-        public void penaltyzone2add(int number)
+        public static void penaltyzone2add(int number)
         {
             penaltycounter2 += number;
             int stock = penaltycounter2;
             int nbelement = 0;
+        if (penaltyzone2.transform.childCount > 0)
+        {
             foreach (Transform child in penaltyzone2.transform)
             {
                 GameObject.Destroy(child.gameObject);
             }
-            while (stock > 0)
+        }
+        while (stock > 0)
             {
                 GameObject newtokenObj;
                 if (stock >= 6)
@@ -164,12 +170,13 @@ public class Penalty : MonoBehaviour
                 nbelement++;
             }
         }
-    public void setgraypuyo()
+    public static void setgraypuyo()
     {
+        if (penaltyzone1.transform.childCount > 0) {
         foreach (Transform child in penaltyzone1.transform)
         {
             GameObject.Destroy(child.gameObject);
-        }
+        } }
         while (penaltycounter1 > 0)
         {
             if (penaltycounter1 >= 6)
@@ -184,11 +191,14 @@ public class Penalty : MonoBehaviour
             }
         }
     } 
-    public void setgraypuyo2()
+    public static void setgraypuyo2()
     {
-        foreach (Transform child in penaltyzone2.transform)
+        if (penaltyzone2.transform.childCount > 0)
         {
-            GameObject.Destroy(child.gameObject);
+            foreach (Transform child in penaltyzone2.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
         }
         while (penaltycounter2 > 0)
         {

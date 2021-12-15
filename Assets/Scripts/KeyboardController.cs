@@ -36,11 +36,7 @@ public class KeyboardController : MonoBehaviour
         {
             PuyoController.puyoClockwise();
         }
-        //Hold
-        /*if (Input.GetKeyUp(KeyCode.Space))
-        {
-            PuyoController.hold();
-        }*/
+       
     }
     if (GameMaster2.gameStatus == GameMaster2.GameStatus.PuyoFalling)
         {
@@ -70,11 +66,7 @@ public class KeyboardController : MonoBehaviour
             {
                 PuyoController2.puyoClockwise();
             }
-            //Hold
-            /*if (Input.GetKeyUp(KeyCode.Space))
-            {
-                PuyoController2.hold();
-            }*/
+       
         }
     } 
 }

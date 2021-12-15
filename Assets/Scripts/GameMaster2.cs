@@ -26,6 +26,7 @@ public class GameMaster2 : MonoBehaviour
     //0=top, 1=right, 2=down, 3=left
     public static int subPuyoDirection = 2;
     public static int comboNumber = 0;
+    public static int destroyedpuyo = 0;
 
     public static int bottomPosition = -176;
     public static int leftPosition = -96;
@@ -58,6 +59,10 @@ public class GameMaster2 : MonoBehaviour
 
         if (gameStatus == GameStatus.PuyoCreating)
         {
+            if (destroyedpuyo > 4) Penalty.penaltyzone1add(destroyedpuyo - 4);
+            destroyedpuyo = 0;
+
+            if (Penalty.penaltycounter2!=0)Penalty.setgraypuyo2();
             PuyoController2.puyoCreate();
             gameStatus = GameStatus.PuyoFalling;
         }
@@ -101,6 +106,16 @@ public class GameMaster2 : MonoBehaviour
     IEnumerator fallingGap()
     {
         yield return new WaitForSeconds(fallingSpeed);
+        //verify if player 1 is on gameoverstate
+        if (PuyoController.reachBottom((int)controlMainPuyo.getPosition().x, (int)controlMainPuyo.getPosition().y) ||
+             PuyoController.reachBottom((int)controlSubPuyo.getPosition().x, (int)controlSubPuyo.getPosition().y) )
+        {
+            if (PuyoController.isGameOver() && GameMaster.gameStatus==GameMaster.GameStatus.GamePause)
+            {
+                gameOverObj.SetActive(true);
+                gameStatus = GameStatus.GamePause;
+            }
+        }
         //If reach the bottom, create new puyo
         if (PuyoController2.reachBottom((int)controlMainPuyo.getPosition().x, (int)controlMainPuyo.getPosition().y) ||
             PuyoController2.reachBottom((int)controlSubPuyo.getPosition().x, (int)controlSubPuyo.getPosition().y))
@@ -110,6 +125,7 @@ public class GameMaster2 : MonoBehaviour
                 gameOverObj.SetActive(true);
                 gameStatus = GameStatus.GamePause;
             }
+         
             else
             {
                 int mainX = (int)controlMainPuyo.getPosition().x;
@@ -134,15 +150,15 @@ public class GameMaster2 : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         StartCoroutine("showComboImg");
-        ImageController.setComboNumber(++comboNumber);
+        ImageController.setComboNumber2(++comboNumber);
         PuyoController2.eliminatePuyo();
         gameStatus = GameStatus.PuyoArranging;
     }
 
     IEnumerator showComboImg()
     {
-        ImageController.comboGameObject.SetActive(true);
+        ImageController.comboGameObject2.SetActive(true);
         yield return new WaitForSeconds(0.8f);
-        ImageController.comboGameObject.SetActive(false);
+        ImageController.comboGameObject2.SetActive(false);
     }
 }
