@@ -13,6 +13,7 @@ public class ImageController : MonoBehaviour
     public Sprite[] numberImgArr;
     public Sprite[] shinyPuyoArr;
     public GameObject comboDisplay;
+    public GameObject comboDisplay2;
 
     public static Dictionary<string, Sprite> bluePuyoImgDic = new Dictionary<string, Sprite>();
     public static Dictionary<string, Sprite> greenPuyoImgDic = new Dictionary<string, Sprite>();
@@ -22,8 +23,11 @@ public class ImageController : MonoBehaviour
     public static Dictionary<int, Sprite> numberImgDic = new Dictionary<int, Sprite>();
     public static Dictionary<int, Sprite> shinyPuyoDic = new Dictionary<int, Sprite>();
     public static GameObject comboGameObject;
+    public static GameObject comboGameObject2;
     public static Image digitsImage;
-    public static Image tenDigitsImage;
+    public static Image tenDigitsImage; 
+    public static Image digitsImage2;
+    public static Image tenDigitsImage2;
 
     public const string NORMAL = "normal";
     public const string LINK_TOP = "top";
@@ -51,8 +55,11 @@ public class ImageController : MonoBehaviour
         distributingPuyoImgToDictionary(redPuyoLinkedImgArr, redPuyoImgDic);
         distributingPuyoImgToDictionary(yellowPuyoLinkedImgArr, yellowPuyoImgDic);
         comboGameObject = comboDisplay;
+        comboGameObject2 = comboDisplay2;
         digitsImage = comboDisplay.transform.GetChild(0).gameObject.GetComponent<Image>();
         tenDigitsImage = comboDisplay.transform.GetChild(1).gameObject.GetComponent<Image>();
+        digitsImage2 = comboDisplay2.transform.GetChild(0).gameObject.GetComponent<Image>();
+        tenDigitsImage2 = comboDisplay2.transform.GetChild(1).gameObject.GetComponent<Image>();
         distributingNumberImgToDictionary(numberImgArr, numberImgDic);
         distributingShinyPuyoToDictionary(shinyPuyoArr, shinyPuyoDic);
     }
@@ -81,6 +88,21 @@ public class ImageController : MonoBehaviour
         }
         digitsImage.sprite = numberImgDic[digits];
         tenDigitsImage.sprite = numberImgDic[tenDigits];
+    }  
+    public static void setComboNumber2(int num)
+    {
+        int digits = num % 10;
+        int tenDigits = num / 10;
+        if (tenDigits == 0)
+        {
+            tenDigitsImage2.gameObject.SetActive(false);
+        }
+        else
+        {
+            tenDigitsImage2.gameObject.SetActive(true);
+        }
+        digitsImage2.sprite = numberImgDic[digits];
+        tenDigitsImage2.sprite = numberImgDic[tenDigits];
     }
 
     public static void setPuyoImage(Puyo puyo, string imgKey)

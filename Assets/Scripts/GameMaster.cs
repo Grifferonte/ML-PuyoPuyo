@@ -26,6 +26,7 @@ public class GameMaster : MonoBehaviour
     //0=top, 1=right, 2=down, 3=left
     public static int subPuyoDirection = 2;
     public static int comboNumber = 0;
+    public static int destroyedpuyo = 0;
 
     public static int bottomPosition = -176;
     public static int leftPosition = -96;
@@ -58,6 +59,9 @@ public class GameMaster : MonoBehaviour
 
         if (gameStatus == GameStatus.PuyoCreating)
         {
+            if (destroyedpuyo > 4) Penalty.penaltyzone2add(destroyedpuyo - 4);
+            destroyedpuyo = 0;
+            if (Penalty.penaltycounter1 != 0) Penalty.setgraypuyo();
             PuyoController.puyoCreate();
             gameStatus = GameStatus.PuyoFalling;
         }
@@ -101,6 +105,16 @@ public class GameMaster : MonoBehaviour
     IEnumerator fallingGap()
     {
         yield return new WaitForSeconds(fallingSpeed);
+       //verify if player 2 is on gameoverstate
+        if (PuyoController2.reachBottom((int)controlMainPuyo.getPosition().x, (int)controlMainPuyo.getPosition().y) ||
+             PuyoController2.reachBottom((int)controlSubPuyo.getPosition().x, (int)controlSubPuyo.getPosition().y))
+        {
+            if (PuyoController2.isGameOver() && GameMaster2.gameStatus == GameMaster2.GameStatus.GamePause)
+            {
+                gameOverObj.SetActive(true);
+                gameStatus = GameStatus.GamePause;
+            }
+        }
         //If reach the bottom, create new puyo
         if (PuyoController.reachBottom((int)controlMainPuyo.getPosition().x, (int)controlMainPuyo.getPosition().y) ||
             PuyoController.reachBottom((int)controlSubPuyo.getPosition().x, (int)controlSubPuyo.getPosition().y))
@@ -110,6 +124,7 @@ public class GameMaster : MonoBehaviour
                 gameOverObj.SetActive(true);
                 gameStatus = GameStatus.GamePause;
             }
+         
             else
             {
                 int mainX = (int)controlMainPuyo.getPosition().x;
