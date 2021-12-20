@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1639949319",
+        "python_version": "3.7.9 (tags/v3.7.9:13c94747c7, Aug 17 2020, 18:58:18) [MSC v.1900 64 bit (AMD64)]",
+        "command_line_arguments": "D:\\ESIEE\\2A\\INFOGRAPHIE3D\\ML-PuyoPuyo\\venv\\Scripts\\mlagents-learn --run-id=Test5",
+        "mlagents_version": "0.27.0",
+        "mlagents_envs_version": "0.27.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.21.4",
+        "end_time_seconds": "1639949340"
+    },
+    "total": 21.3739107,
+    "count": 1,
+    "self": 0.003647700000001919,
+    "children": {
+        "run_training.setup": {
+            "total": 0.0773763999999999,
+            "count": 1,
+            "self": 0.0773763999999999
+        },
+        "TrainerController.start_learning": {
+            "total": 21.2928866,
+            "count": 1,
+            "self": 0.0005683000000011873,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 21.2923033,
+                    "count": 1,
+                    "self": 21.2923033
+                },
+                "trainer_threads": {
+                    "total": 1.4999999997655777e-06,
+                    "count": 1,
+                    "self": 1.4999999997655777e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 1.34999999978902e-05,
+                    "count": 1,
+                    "self": 1.34999999978902e-05
+                }
+            }
+        }
+    }
+}
