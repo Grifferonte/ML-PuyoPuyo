@@ -33,6 +33,7 @@ public class GameMaster2 : MonoBehaviour
     public static int rightPosition = 64;
 
     private bool falling = true;
+    private PuyoAgent puyoAgent;
 
     // Use this for initialization
     void Start()

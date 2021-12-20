@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -433,7 +432,7 @@ public class PuyoController2 : MonoBehaviour
                 {
                     emptyRow = false;
                     //print(puyoArr[x, y].getColor()+" " +puyoArr[x, y].getLinkedPuyoList().Count);
-                    if (GameMaster2.puyoArr[x, y].getLinkPuyoList().Count >= 4)
+                    if (GameMaster2.puyoArr[x, y].getLinkPuyoList().Count >= 4 && GameMaster2.puyoArr[x,y].getColor() != 5)
                     {
                         haveLinkPuyo = true;
                         GameMaster2.puyoArr[x, y].setLinkStatus(ImageController.ELIMINATE_FACE);
